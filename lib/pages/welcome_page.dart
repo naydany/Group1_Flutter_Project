@@ -1,152 +1,129 @@
 import 'package:flutter/material.dart';
+import 'package:maintenance_provider_service/pages/login_page.dart';
+import 'package:maintenance_provider_service/pages/register_page.dart';
+import 'package:maintenance_provider_service/widgets/phone_frame.dart';
+class WelcomePage extends StatelessWidget {
+  const WelcomePage({super.key});
 
-class RegisterPage extends StatelessWidget {
-  const RegisterPage({super.key});
-
-  static const Color kTeal = Color(0xFF1F6F86);
+  static const Color kTeal = Color(0xFF156E88);
+  static const Color kTealDark = Color(0xFF0F5C72);
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, c) {
-        final w = c.maxWidth;
-        final h = c.maxHeight;
+    final s = MediaQuery.of(context).size;
+    final iconSize = (s.width * 0.52).clamp(150.0, 220.0);
 
-        final headerH = h * 0.28;
-        final circleSize = w * 0.32;
-
-        return Scaffold(
-          backgroundColor: Colors.white, // inside the phone
-          body: Stack(
-            alignment: Alignment.topCenter,
-            children: [
-              Column(
-                children: [
-                  // Teal header
-                  Container(
-                    height: headerH,
-                    decoration: const BoxDecoration(
-                      color: kTeal,
-                      borderRadius: BorderRadius.vertical(
-                        top: Radius.circular(24),
-                      ),
-                    ),
+    return Container(
+      color: kTeal,
+      child: SafeArea(
+        child: Center(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 18),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(height: 40),
+                const Text(
+                  "Mantenanace Provider Services",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 26,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.white,
                   ),
+                ),
+                const SizedBox(height: 40),
 
-                  // White body
-                  Expanded(
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.vertical(
-                          bottom: Radius.circular(24),
-                        ),
-                      ),
-                      child: SingleChildScrollView(
-                        padding: EdgeInsets.fromLTRB(
-                          20,
-                          circleSize / 2 + 28,
-                          20,
-                          20,
-                        ),
-                        child: Column(
-                          children: [
-                            const Text(
-                              "Register",
-                              style: TextStyle(
-                                fontSize: 28,
-                                fontWeight: FontWeight.w600,
-                                color: kTeal,
-                                fontFamily: "serif",
-                              ),
-                            ),
-                            const SizedBox(height: 18),
-
-                            _buildInput("Full Name", Icons.person),
-                            const SizedBox(height: 14),
-                            _buildInput("+855", Icons.phone),
-
-                            const SizedBox(height: 18),
-
-                            SizedBox(
-                              width: double.infinity,
-                              height: 50,
-                              child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: kTeal,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(14),
-                                  ),
-                                ),
-                                onPressed: () {},
-                                child: const Text(
-                                  "Register",
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontFamily: "serif",
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            ),
-
-                            const SizedBox(height: 16),
-                            const Text("Or",
-                                style: TextStyle(color: kTeal, fontSize: 16)),
-                            const SizedBox(height: 10),
-
-                            const Icon(Icons.g_mobiledata,
-                                size: 88, color: Colors.red),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-
-              // Circle icon overlap
-              Positioned(
-                top: headerH - circleSize / 2,
-                child: Container(
-                  height: circleSize,
-                  width: circleSize,
+                Container(
+                  width: iconSize,
+                  height: iconSize,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: Colors.white,
-                    border: Border.all(color: kTeal, width: 3),
+                    color: Colors.white.withOpacity(0.10),
+                    border: Border.all(color: Colors.white, width: 5),
                     boxShadow: [
                       BoxShadow(
-                        blurRadius: 10,
-                        offset: const Offset(0, 6),
-                        color: Colors.black.withOpacity(0.2),
-                      )
+                        blurRadius: 16,
+                        offset: const Offset(0, 10),
+                        color: Colors.black.withOpacity(0.22),
+                      ),
                     ],
                   ),
-                  child: Icon(Icons.handyman,
-                      size: circleSize * 0.5, color: kTeal),
+                  child: const Center(
+                    child: Icon(Icons.handyman_rounded,
+                        size: 92, color: Colors.white),
+                  ),
                 ),
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
 
-  static Widget _buildInput(String hint, IconData icon) {
-    return TextField(
-      decoration: InputDecoration(
-        hintText: hint,
-        prefixIcon: Icon(icon, color: kTeal),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(14),
-          borderSide: const BorderSide(color: kTeal, width: 2),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(14),
-          borderSide: const BorderSide(color: kTeal, width: 2),
+                const SizedBox(height: 35),
+
+                SizedBox(
+                  width: (s.width * 0.75).clamp(240.0, 330.0),
+                  height: 54,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                      context,
+                        MaterialPageRoute(builder: (_) => const PhoneFrame(
+                            child:LoginPage(),
+                        ),
+                      ),
+                    );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: kTealDark,
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(26),
+                      ),
+                    ),
+                    child: const Text(
+                      "LET'S GO LOGIN !",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.white,
+                        letterSpacing: 1,
+                      ),
+                    ),
+                  ),
+                ),
+
+                const SizedBox(height: 18),
+
+                Text(
+                  "Don't have an account?",
+                  style: TextStyle(
+                    color: Colors.white.withOpacity(0.85),
+                    fontSize: 13,
+                  ),
+                ),
+
+                const SizedBox(height: 6),
+
+                GestureDetector(
+                  onTap: () {
+                    // Navigate to register page
+                    Navigator.push(
+                      context,
+                        MaterialPageRoute(builder: (_) => const PhoneFrame(
+                            child:RegisterPage(),
+                        ),
+                      ),
+                    );
+                  },
+                  child: const Text(
+                    "Register",
+                    style: TextStyle(
+                      color: Color(0xFFE8F06A),
+                      fontSize: 14,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );

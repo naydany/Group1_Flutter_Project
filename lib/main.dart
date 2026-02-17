@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:maintenance_provider_service/pages/register_page.dart';
+import 'package:maintenance_provider_service/pages/welcome_page.dart';
 import 'package:maintenance_provider_service/widgets/phone_frame.dart';
 
 

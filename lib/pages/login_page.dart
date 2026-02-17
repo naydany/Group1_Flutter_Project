@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:maintenance_provider_service/pages/register_page.dart';
+import 'package:maintenance_provider_service/widgets/phone_frame.dart';
 
-class RegisterPage extends StatelessWidget {
-  const RegisterPage({super.key});
+class LoginPage extends StatelessWidget {
+  const LoginPage({super.key});
 
   static const Color kTeal = Color(0xFF1F6F86);
 
@@ -52,7 +54,7 @@ class RegisterPage extends StatelessWidget {
                         child: Column(
                           children: [
                             const Text(
-                              "Register",
+                              "Login",
                               style: TextStyle(
                                 fontSize: 28,
                                 fontWeight: FontWeight.w600,
@@ -62,8 +64,6 @@ class RegisterPage extends StatelessWidget {
                             ),
                             const SizedBox(height: 18),
 
-                            _buildInput("Full Name", Icons.person),
-                            const SizedBox(height: 14),
                             _buildInput("+855", Icons.phone),
 
                             const SizedBox(height: 18),
@@ -78,9 +78,11 @@ class RegisterPage extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(14),
                                   ),
                                 ),
-                                onPressed: () {},
+                                onPressed: () {
+                                  // TODO: start login action
+                                },
                                 child: const Text(
-                                  "Register",
+                                  "Start Login",
                                   style: TextStyle(
                                     fontSize: 18,
                                     fontFamily: "serif",
@@ -91,9 +93,48 @@ class RegisterPage extends StatelessWidget {
                               ),
                             ),
 
+                            const SizedBox(height: 12),
+
+                            // Go To Register (black + red clickable)
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Text(
+                                  "Go To ",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (_) => const PhoneFrame(
+                                          child: RegisterPage(),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  child: const Text(
+                                    "Register",
+                                    style: TextStyle(
+                                      color: Color.fromARGB(255, 231, 37, 37),
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+
                             const SizedBox(height: 16),
-                            const Text("Or",
-                                style: TextStyle(color: kTeal, fontSize: 16)),
+                            const Text(
+                              "Or",
+                              style: TextStyle(color: kTeal, fontSize: 16),
+                            ),
                             const SizedBox(height: 10),
 
                             const Icon(Icons.g_mobiledata,
