@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:maintenance_provider_service/pages/home_page.dart';
 import 'package:maintenance_provider_service/pages/register_page.dart';
 import 'package:maintenance_provider_service/widgets/phone_frame.dart';
 
@@ -80,6 +81,13 @@ class LoginPage extends StatelessWidget {
                                 ),
                                 onPressed: () {
                                   // TODO: start login action
+                                  Navigator.push(context,
+                                    MaterialPageRoute(
+                                      builder: (_) => const PhoneFrame(
+                                        child: HomePage(),
+                                      ),
+                                    ),
+                                  );
                                 },
                                 child: const Text(
                                   "Start Login",
