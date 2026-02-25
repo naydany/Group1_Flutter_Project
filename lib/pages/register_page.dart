@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:maintenance_provider_service/pages/home_page.dart';
 
 class RegisterPage extends StatelessWidget {
   const RegisterPage({super.key});
@@ -16,7 +17,7 @@ class RegisterPage extends StatelessWidget {
         final circleSize = w * 0.32;
 
         return Scaffold(
-          backgroundColor: Colors.white, // inside the phone
+          backgroundColor: Colors.white,
           body: Stack(
             alignment: Alignment.topCenter,
             children: [
@@ -68,6 +69,7 @@ class RegisterPage extends StatelessWidget {
 
                             const SizedBox(height: 18),
 
+                            // ✅ REGISTER BUTTON → go to HomePage
                             SizedBox(
                               width: double.infinity,
                               height: 50,
@@ -78,7 +80,14 @@ class RegisterPage extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(14),
                                   ),
                                 ),
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (_) => const HomePage(),
+                                    ),
+                                  );
+                                },
                                 child: const Text(
                                   "Register",
                                   style: TextStyle(
@@ -92,12 +101,17 @@ class RegisterPage extends StatelessWidget {
                             ),
 
                             const SizedBox(height: 16),
-                            const Text("Or",
-                                style: TextStyle(color: kTeal, fontSize: 16)),
+                            const Text(
+                              "Or",
+                              style: TextStyle(color: kTeal, fontSize: 16),
+                            ),
                             const SizedBox(height: 10),
 
-                            const Icon(Icons.g_mobiledata,
-                                size: 88, color: Colors.red),
+                            const Icon(
+                              Icons.g_mobiledata,
+                              size: 88,
+                              color: Colors.red,
+                            ),
                           ],
                         ),
                       ),
@@ -124,8 +138,11 @@ class RegisterPage extends StatelessWidget {
                       )
                     ],
                   ),
-                  child: Icon(Icons.handyman,
-                      size: circleSize * 0.5, color: kTeal),
+                  child: Icon(
+                    Icons.handyman,
+                    size: circleSize * 0.5,
+                    color: kTeal,
+                  ),
                 ),
               ),
             ],
@@ -135,6 +152,7 @@ class RegisterPage extends StatelessWidget {
     );
   }
 
+  // Input text field
   static Widget _buildInput(String hint, IconData icon) {
     return TextField(
       decoration: InputDecoration(

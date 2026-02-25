@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:maintenance_provider_service/pages/register_page.dart';
 import 'package:maintenance_provider_service/widgets/phone_frame.dart';
+import 'package:maintenance_provider_service/pages/home_page.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -18,13 +19,12 @@ class LoginPage extends StatelessWidget {
         final circleSize = w * 0.32;
 
         return Scaffold(
-          backgroundColor: Colors.white, // inside the phone
+          backgroundColor: Colors.white,
           body: Stack(
             alignment: Alignment.topCenter,
             children: [
               Column(
                 children: [
-                  // Teal header
                   Container(
                     height: headerH,
                     decoration: const BoxDecoration(
@@ -35,7 +35,6 @@ class LoginPage extends StatelessWidget {
                     ),
                   ),
 
-                  // White body
                   Expanded(
                     child: Container(
                       decoration: const BoxDecoration(
@@ -68,6 +67,7 @@ class LoginPage extends StatelessWidget {
 
                             const SizedBox(height: 18),
 
+                            // ✅ LOGIN BUTTON
                             SizedBox(
                               width: double.infinity,
                               height: 50,
@@ -79,7 +79,12 @@ class LoginPage extends StatelessWidget {
                                   ),
                                 ),
                                 onPressed: () {
-                                  // TODO: start login action
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (_) => const HomePage(),
+                                    ),
+                                  );
                                 },
                                 child: const Text(
                                   "Start Login",
@@ -95,7 +100,7 @@ class LoginPage extends StatelessWidget {
 
                             const SizedBox(height: 12),
 
-                            // Go To Register (black + red clickable)
+                            // ✅ GO TO REGISTER
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -137,8 +142,11 @@ class LoginPage extends StatelessWidget {
                             ),
                             const SizedBox(height: 10),
 
-                            const Icon(Icons.g_mobiledata,
-                                size: 88, color: Colors.red),
+                            const Icon(
+                              Icons.g_mobiledata,
+                              size: 88,
+                              color: Colors.red,
+                            ),
                           ],
                         ),
                       ),
@@ -147,7 +155,6 @@ class LoginPage extends StatelessWidget {
                 ],
               ),
 
-              // Circle icon overlap
               Positioned(
                 top: headerH - circleSize / 2,
                 child: Container(
@@ -165,8 +172,11 @@ class LoginPage extends StatelessWidget {
                       )
                     ],
                   ),
-                  child: Icon(Icons.handyman,
-                      size: circleSize * 0.5, color: kTeal),
+                  child: Icon(
+                    Icons.handyman,
+                    size: circleSize * 0.5,
+                    color: kTeal,
+                  ),
                 ),
               ),
             ],
