@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:maintenance_provider_service/pages/welcome_page.dart';
+import 'package:maintenance_provider_service/pages/home_page.dart';
 import 'package:maintenance_provider_service/widgets/phone_frame.dart';
-
 
 void main() {
   runApp(const MyApp());
@@ -14,13 +14,20 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      title: 'Maintenance Provider Service',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: PhoneFrame(
-        child: WelcomePage(),
-      ),
+
+      // Initial Route
+      initialRoute: '/',
+
+      // Named Routes
+      routes: {
+        '/': (context) => const PhoneFrame(child: WelcomePage()),
+        '/home': (context) => const PhoneFrame(child: HomePage()),
+      },
     );
   }
 }
