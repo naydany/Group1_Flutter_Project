@@ -74,12 +74,8 @@ class _DetailPageState extends State<DetailPage> {
               background: Stack(
                 fit: StackFit.expand,
                 children: [
-                  // Background Image
-                  Image.network(
-                    widget.imageUrl ??
-                        "https://images.unsplash.com/photo-1581578731548-c64695cc6952",
-                    fit: BoxFit.cover,
-                  ),
+                  // Background Image - Using asset image
+                  Image.asset("assets/Images/appliance.jpg", fit: BoxFit.cover),
                   // Gradient Overlay
                   Container(
                     decoration: BoxDecoration(
@@ -193,10 +189,7 @@ class _DetailPageState extends State<DetailPage> {
                 children: [
                   const Text(
                     "About Me",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 10),
                   Container(
@@ -308,10 +301,7 @@ class _DetailPageState extends State<DetailPage> {
                 children: [
                   const Text(
                     "Contact Information",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 15),
                   _buildInfoRow(Icons.person, "Name", "Dara Mendora"),
@@ -322,18 +312,14 @@ class _DetailPageState extends State<DetailPage> {
                     "Address",
                     "8-14 Street 101C1, Phnom Penh",
                   ),
-                  _buildInfoRow(
-                    Icons.home,
-                    "Type",
-                    "House",
-                  ),
+                  _buildInfoRow(Icons.home, "Type", "House"),
                 ],
               ),
             ),
 
             const SizedBox(height: 20),
 
-            // Location Section - Updated with Phnom Penh images
+            // Location Section - Updated with asset image
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
@@ -352,30 +338,25 @@ class _DetailPageState extends State<DetailPage> {
                 children: [
                   const Text(
                     "Location",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 10),
-                  
-                  // Map Image of Phnom Penh
+
+                  // Map Image - Using asset image
                   Container(
                     height: 150,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12),
                       color: Colors.grey[300],
                       image: const DecorationImage(
-                        image: NetworkImage(
-                          "https://www.researchgate.net/publication/345384389/figure/fig1/AS:954786789748738@1604678361312/Location-map-of-the-study-area-in-Phnom-Penh-City-Cambodia.png",
-                        ),
+                        image: AssetImage("assets/Images/appliance.jpg"),
                         fit: BoxFit.cover,
                       ),
                     ),
                   ),
-                  
+
                   const SizedBox(height: 10),
-                  
+
                   // Location Info
                   Row(
                     children: [
@@ -397,9 +378,9 @@ class _DetailPageState extends State<DetailPage> {
                       ),
                     ],
                   ),
-                  
+
                   const SizedBox(height: 8),
-                  
+
                   // Street Address
                   Row(
                     children: [
@@ -420,16 +401,18 @@ class _DetailPageState extends State<DetailPage> {
                       ),
                     ],
                   ),
-                  
+
                   const SizedBox(height: 8),
-                  
+
                   // Use Current Location Button
                   TextButton.icon(
                     onPressed: () {
                       // Handle current location
                     },
                     icon: const Icon(Icons.near_me, size: 16),
-                    label: const Text("Use your current location in Phnom Penh"),
+                    label: const Text(
+                      "Use your current location in Phnom Penh",
+                    ),
                     style: TextButton.styleFrom(
                       foregroundColor: const Color(0xFF1E6F86),
                       padding: EdgeInsets.zero,
@@ -460,18 +443,12 @@ class _DetailPageState extends State<DetailPage> {
                 children: [
                   const Text(
                     "Additional Details",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 10),
                   const Text(
                     "House's No, Number of Floor etc.",
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.black87,
-                    ),
+                    style: TextStyle(fontSize: 14, color: Colors.black87),
                   ),
                   const SizedBox(height: 15),
                   Row(
@@ -528,19 +505,13 @@ class _DetailPageState extends State<DetailPage> {
             width: 80,
             child: Text(
               label,
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.grey[600],
-              ),
+              style: TextStyle(fontSize: 14, color: Colors.grey[600]),
             ),
           ),
           Expanded(
             child: Text(
               value,
-              style: const TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
-              ),
+              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
             ),
           ),
         ],
@@ -558,32 +529,18 @@ class _DetailPageState extends State<DetailPage> {
           crossAxisSpacing: 10,
           childAspectRatio: 1,
         ),
-        delegate: SliverChildBuilderDelegate(
-          (context, index) {
-            // Phnom Penh location images for gallery
-            List<String> phnomPenhImages = [
-              "https://images.unsplash.com/photo-1589923188900-85dae523342b?ixlib=rb-4.0.3", // Royal Palace
-              "https://images.unsplash.com/photo-1589923188900-85dae523342b?ixlib=rb-4.0.3", // Silver Pagoda
-              "https://images.unsplash.com/photo-1589923188900-85dae523342b?ixlib=rb-4.0.3", // Riverside
-              "https://images.unsplash.com/photo-1589923188900-85dae523342b?ixlib=rb-4.0.3", // Central Market
-              "https://images.unsplash.com/photo-1589923188900-85dae523342b?ixlib=rb-4.0.3", // Wat Phnom
-              "https://images.unsplash.com/photo-1589923188900-85dae523342b?ixlib=rb-4.0.3", // Independence Monument
-            ];
-            
-            return Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                image: DecorationImage(
-                  image: NetworkImage(
-                    phnomPenhImages[index % phnomPenhImages.length],
-                  ),
-                  fit: BoxFit.cover,
-                ),
+        delegate: SliverChildBuilderDelegate((context, index) {
+          // Gallery images from assets folder
+          return Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              image: const DecorationImage(
+                image: AssetImage("assets/Images/appliance.jpg"),
+                fit: BoxFit.cover,
               ),
-            );
-          },
-          childCount: 6,
-        ),
+            ),
+          );
+        }, childCount: 6),
       ),
     );
   }
@@ -632,10 +589,7 @@ class _DetailPageState extends State<DetailPage> {
               SizedBox(width: 10),
               Text(
                 "Booking Now",
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
             ],
           ),

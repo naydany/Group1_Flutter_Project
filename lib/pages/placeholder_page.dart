@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:maintenance_provider_service/pages/login_page.dart';
+import 'package:maintenance_provider_service/pages/bookinghistory.dart'; // Adjust the path as needed
 
 class PlaceholderPage extends StatelessWidget {
   final String title;
 
-  const PlaceholderPage({
-    super.key,
-    required this.title,
-  });
+  const PlaceholderPage({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -61,10 +59,7 @@ class PlaceholderPage extends StatelessWidget {
                       SizedBox(height: 5),
                       Text(
                         'cambodia',
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.grey,
-                        ),
+                        style: TextStyle(fontSize: 16, color: Colors.grey),
                       ),
                     ],
                   ),
@@ -73,12 +68,17 @@ class PlaceholderPage extends StatelessWidget {
             ),
           ),
 
-          // My booking histories button
           _buildMenuItem(
             icon: Icons.history,
             title: 'My booking histories',
             onTap: () {
-              // Navigate to booking histories
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      const BookingHistoryPage(), // Now this works!
+                ),
+              );
             },
           ),
 
@@ -90,24 +90,20 @@ class PlaceholderPage extends StatelessWidget {
             title: 'Location',
             onTap: () {},
           ),
-          
+
           _buildMenuItem(
             icon: Icons.payment,
             title: 'Payment Method',
             onTap: () {},
           ),
-          
+
           _buildMenuItem(
             icon: Icons.contact_phone,
             title: 'Contact Us',
             onTap: () {},
           ),
-          
-          _buildMenuItem(
-            icon: Icons.settings,
-            title: 'Setting',
-            onTap: () {},
-          ),
+
+          _buildMenuItem(icon: Icons.settings, title: 'Setting', onTap: () {}),
 
           const Divider(),
 
@@ -132,16 +128,10 @@ class PlaceholderPage extends StatelessWidget {
     Color? color,
   }) {
     return ListTile(
-      leading: Icon(
-        icon,
-        color: color ?? const Color(0xFF1E6F86),
-      ),
+      leading: Icon(icon, color: color ?? const Color(0xFF1E6F86)),
       title: Text(
         title,
-        style: TextStyle(
-          fontSize: 16,
-          color: color ?? Colors.black87,
-        ),
+        style: TextStyle(fontSize: 16, color: color ?? Colors.black87),
       ),
       trailing: const Icon(
         Icons.arrow_forward_ios,
@@ -165,9 +155,7 @@ class PlaceholderPage extends StatelessWidget {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(dialogContext),
-              style: TextButton.styleFrom(
-                foregroundColor: Colors.grey,
-              ),
+              style: TextButton.styleFrom(foregroundColor: Colors.grey),
               child: const Text('Cancel'),
             ),
             TextButton(
@@ -175,9 +163,7 @@ class PlaceholderPage extends StatelessWidget {
                 Navigator.pop(dialogContext);
                 _logout(context);
               },
-              style: TextButton.styleFrom(
-                foregroundColor: Colors.red,
-              ),
+              style: TextButton.styleFrom(foregroundColor: Colors.red),
               child: const Text('Logout'),
             ),
           ],

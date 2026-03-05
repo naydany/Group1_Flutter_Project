@@ -1,10 +1,49 @@
 import 'package:flutter/material.dart';
 import 'package:maintenance_provider_service/pages/home_page.dart';
 
-class RegisterPage extends StatelessWidget {
+class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
 
+  @override
+  State<RegisterPage> createState() => _RegisterPageState();
+}
+
+class _RegisterPageState extends State<RegisterPage> {
   static const Color kTeal = Color(0xFF1F6F86);
+
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
+
+  void _handleRegister() {
+    String name = _nameController.text.trim();
+    String phone = _phoneController.text.trim();
+
+    if (name.isEmpty || phone.isEmpty) {
+      // Show alert message
+      String message = '';
+      if (name.isEmpty && phone.isEmpty) {
+        message = 'Please enter your name and phone number';
+      } else if (name.isEmpty) {
+        message = 'Please enter your name';
+      } else {
+        message = 'Please enter your phone number';
+      }
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(message),
+          backgroundColor: Colors.red,
+          duration: const Duration(seconds: 2),
+        ),
+      );
+    } else {
+      // Navigate to home page
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (_) => const HomePage()),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,9 +102,13 @@ class RegisterPage extends StatelessWidget {
                             ),
                             const SizedBox(height: 18),
 
-                            _buildInput("Full Name", Icons.person),
+                            _buildInput(
+                              "Full Name",
+                              Icons.person,
+                              _nameController,
+                            ),
                             const SizedBox(height: 14),
-                            _buildInput("+855", Icons.phone),
+                            _buildInput("+855", Icons.phone, _phoneController),
 
                             const SizedBox(height: 18),
 
@@ -80,14 +123,7 @@ class RegisterPage extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(14),
                                   ),
                                 ),
-                                onPressed: () {
-                                  Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (_) => const HomePage(),
-                                    ),
-                                  );
-                                },
+                                onPressed: _handleRegister,
                                 child: const Text(
                                   "Register",
                                   style: TextStyle(
@@ -135,7 +171,7 @@ class RegisterPage extends StatelessWidget {
                         blurRadius: 10,
                         offset: const Offset(0, 6),
                         color: Colors.black.withOpacity(0.2),
-                      )
+                      ),
                     ],
                   ),
                   child: Icon(
@@ -153,8 +189,14 @@ class RegisterPage extends StatelessWidget {
   }
 
   // Input text field
-  static Widget _buildInput(String hint, IconData icon) {
+  Widget _buildInput(
+    String hint,
+    IconData icon,
+    TextEditingController controller,
+  ) {
     return TextField(
+      controller: controller,
+      keyboardType: hint == "+855" ? TextInputType.phone : TextInputType.text,
       decoration: InputDecoration(
         hintText: hint,
         prefixIcon: Icon(icon, color: kTeal),
@@ -168,5 +210,12 @@ class RegisterPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _phoneController.dispose();
+    super.dispose();
   }
 }

@@ -3,10 +3,38 @@ import 'package:maintenance_provider_service/pages/register_page.dart';
 import 'package:maintenance_provider_service/widgets/phone_frame.dart';
 import 'package:maintenance_provider_service/pages/home_page.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   static const Color kTeal = Color(0xFF1F6F86);
+
+  final TextEditingController _phoneController = TextEditingController();
+
+  void _handleLogin() {
+    String phoneNumber = _phoneController.text.trim();
+
+    if (phoneNumber.isEmpty) {
+      // Show alert message
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Please enter your phone number'),
+          backgroundColor: Colors.red,
+          duration: Duration(seconds: 2),
+        ),
+      );
+    } else {
+      // Navigate to home page
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (_) => const HomePage()),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +91,7 @@ class LoginPage extends StatelessWidget {
                             ),
                             const SizedBox(height: 18),
 
-                            _buildInput("+855", Icons.phone),
+                            _buildInput("+855", Icons.phone, _phoneController),
 
                             const SizedBox(height: 18),
 
@@ -78,14 +106,7 @@ class LoginPage extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(14),
                                   ),
                                 ),
-                                onPressed: () {
-                                  Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (_) => const HomePage(),
-                                    ),
-                                  );
-                                },
+                                onPressed: _handleLogin,
                                 child: const Text(
                                   "Start Login",
                                   style: TextStyle(
@@ -169,7 +190,7 @@ class LoginPage extends StatelessWidget {
                         blurRadius: 10,
                         offset: const Offset(0, 6),
                         color: Colors.black.withOpacity(0.2),
-                      )
+                      ),
                     ],
                   ),
                   child: Icon(
@@ -186,8 +207,14 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  static Widget _buildInput(String hint, IconData icon) {
+  Widget _buildInput(
+    String hint,
+    IconData icon,
+    TextEditingController controller,
+  ) {
     return TextField(
+      controller: controller,
+      keyboardType: TextInputType.phone,
       decoration: InputDecoration(
         hintText: hint,
         prefixIcon: Icon(icon, color: kTeal),
@@ -201,5 +228,11 @@ class LoginPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _phoneController.dispose();
+    super.dispose();
   }
 }

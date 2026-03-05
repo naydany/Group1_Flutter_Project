@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:maintenance_provider_service/pages/service_page.dart';
 import 'package:maintenance_provider_service/pages/notification_page.dart';
 import 'package:maintenance_provider_service/pages/placeholder_page.dart';
-
+import 'package:maintenance_provider_service/pages/Ac_company.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -14,9 +14,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int currentIndex = 0;
 
-  final List<Widget> _pages = [
-    const HomePageContent(),
-  ];
+  final List<Widget> _pages = [const HomePageContent()];
 
   @override
   Widget build(BuildContext context) {
@@ -52,19 +50,18 @@ class _HomePageState extends State<HomePage> {
               MaterialPageRoute(builder: (_) => const NotificationPage()),
             );
             break;
-         case 3:
-  Navigator.push(
-    context,
-    MaterialPageRoute(builder: (_) => const PlaceholderPage(title: 'Profile')), 
-  );
-  break;
+          case 3:
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => const PlaceholderPage(title: 'Profile'),
+              ),
+            );
+            break;
         }
       },
       items: [
-        const BottomNavigationBarItem(
-          icon: Icon(Icons.home),
-          label: "Home",
-        ),
+        const BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
         const BottomNavigationBarItem(
           icon: Icon(Icons.confirmation_num_outlined),
           label: "Service",
@@ -89,10 +86,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   child: const Text(
                     '2',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 10,
-                    ),
+                    style: TextStyle(color: Colors.white, fontSize: 10),
                     textAlign: TextAlign.center,
                   ),
                 ),
@@ -165,25 +159,28 @@ class HomePageContent extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 12),
-         GestureDetector(
-  onTap: () {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (_) => const PlaceholderPage(title: 'Profile')),
-    );
-  },
-  child: const Icon(Icons.person_outline, color: Colors.white),
-),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => const PlaceholderPage(title: 'Profile'),
+                ),
+              );
+            },
+            child: const Icon(Icons.person_outline, color: Colors.white),
+          ),
         ],
       ),
     );
   }
 
+  /// slide banner
   Widget _buildBanner(BuildContext context) {
     final List<String> bannerImages = [
-      "https://images.unsplash.com/photo-1581578731548-c64695cc6952",
-      "https://images.unsplash.com/photo-1603791440384-56cd371ee9a7",
-      "https://images.unsplash.com/photo-1621905252472-943afaa20f4c",
+      "assets/Images/appliance.jpg",
+      "assets/Images/pest_control.webp",
+      "assets/Images/cleaning.jpeg",
     ];
 
     return SizedBox(
@@ -205,7 +202,9 @@ class HomePageContent extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   image: DecorationImage(
-                    image: NetworkImage(bannerImages[index]),
+                    image: AssetImage(
+                      bannerImages[index],
+                    ), // Changed to AssetImage
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -219,15 +218,53 @@ class HomePageContent extends StatelessWidget {
 
   Widget _buildGridSection(BuildContext context) {
     final List<Map<String, dynamic>> categories = [
-      {"title": "AC Repair", "image": "https://images.unsplash.com/photo-1581093458791-9d15482442f6", "route": const ServicePage()},
-      {"title": "Plumbing", "image": "https://images.unsplash.com/photo-1581574202471-2d5d9f5e4c79", "route": const ServicePage()},
-      {"title": "Cleaning", "image": "https://images.unsplash.com/photo-1585421514738-01798e348b17", "route": const ServicePage()},
-      {"title": "Painting", "image": "https://images.unsplash.com/photo-1562259949-e8e7689d7828", "route": const ServicePage()},
-      {"title": "Electrician", "image": "https://images.unsplash.com/photo-1581090700227-4c4f50f3d8e6", "route": const ServicePage()},
-      {"title": "Carpenter", "image": "https://images.unsplash.com/photo-1503387762-592deb58ef4e", "route": const ServicePage()},
-      {"title": "Appliance", "image": "https://images.unsplash.com/photo-1581091215367-59ab6b9b1b5c", "route": const ServicePage()},
-      {"title": "Pest Control", "image": "https://images.unsplash.com/photo-1621905251189-08b45d6a269e", "route": const ServicePage()},
-      {"title": "More", "image": "https://images.unsplash.com/photo-1558211583-d26f610c1eb1", "route": const ServicePage()},
+      {
+        "title": "AC Repair",
+        "image":
+            "assets/Images/images (6).jpeg", // Fixed typo from eletric to electric
+        "route": const AcRepairServicesPage(),
+      },
+      {
+        "title": "Plumbing",
+        "image": "assets/Images/plumbing.jpeg", // Use specific image
+        "route": const ServicePage(),
+      },
+      {
+        "title": "Cleaning",
+        "image": "assets/Images/cleaning.jpeg", // Use specific image
+        "route": const ServicePage(),
+      },
+      {
+        "title": "Painting",
+        "image": "assets/Images/painting.jpeg", // Use specific image
+        "route": const ServicePage(),
+      },
+      {
+        "title": "Electrician",
+        "image": "assets/Images/eletric.jpeg", // Use specific image
+        "route": const ServicePage(),
+      },
+      {
+        "title": "Carpenter",
+        "image": "assets/Images/carpenter.webp", // Use specific image
+        "route": const ServicePage(),
+      },
+      {
+        "title": "Appliance",
+        "image": "assets/Images/appliance.jpg", // Use specific image
+        "route": const ServicePage(),
+      },
+      {
+        "title": "Pest Control",
+        "image":
+            "assets/Images/pest_control.webp", // Use specific image (renamed from "pest control.webp")
+        "route": const ServicePage(),
+      },
+      {
+        "title": "More",
+        "image": "assets/Images/more.webp", // Use specific image
+        "route": const ServicePage(),
+      },
     ];
 
     return Padding(
@@ -252,8 +289,8 @@ class HomePageContent extends StatelessWidget {
                 child: const Text(
                   "See all",
                   style: TextStyle(
-                    color: Color(0xFF1E6F86), 
-                    fontWeight: FontWeight.w600
+                    color: Color(0xFF1E6F86),
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
               ),
@@ -274,7 +311,9 @@ class HomePageContent extends StatelessWidget {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (_) => categories[index]["route"]),
+                      MaterialPageRoute(
+                        builder: (_) => categories[index]["route"],
+                      ),
                     );
                   },
                   child: Column(
@@ -290,9 +329,27 @@ class HomePageContent extends StatelessWidget {
                               offset: const Offset(0, 3),
                             ),
                           ],
-                          image: DecorationImage(
-                            image: NetworkImage(categories[index]["image"]),
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(18),
+                          child: Image.asset(
+                            categories[index]["image"],
+                            width: double.infinity,
+                            height: 80,
                             fit: BoxFit.cover,
+                            errorBuilder: (context, error, stackTrace) {
+                              print(
+                                'Error loading image: ${categories[index]["image"]} - $error',
+                              );
+                              return Container(
+                                color: Colors.grey[300],
+                                child: const Icon(
+                                  Icons.broken_image,
+                                  color: Colors.grey,
+                                  size: 30,
+                                ),
+                              );
+                            },
                           ),
                         ),
                       ),
@@ -301,7 +358,7 @@ class HomePageContent extends StatelessWidget {
                         categories[index]["title"],
                         textAlign: TextAlign.center,
                         style: const TextStyle(
-                          fontSize: 13, 
+                          fontSize: 13,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
