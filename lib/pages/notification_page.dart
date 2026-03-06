@@ -9,13 +9,14 @@ class NotificationPage extends StatefulWidget {
 
 class _NotificationPageState extends State<NotificationPage> {
   String selectedFilter = 'All'; // All, Unread, Mentions
-  
+
   // Sample notification data
   final List<Map<String, dynamic>> notifications = [
     {
       'id': 1,
       'title': 'New Service Available',
-      'description': 'Your booking request for plumbing service has been accepted',
+      'description':
+          'Your booking request for plumbing service has been accepted',
       'time': '5 min ago',
       'type': 'booking',
       'isRead': false,
@@ -82,9 +83,7 @@ class _NotificationPageState extends State<NotificationPage> {
       body: Column(
         children: [
           _buildFilterTabs(),
-          Expanded(
-            child: _buildNotificationList(),
-          ),
+          Expanded(child: _buildNotificationList()),
         ],
       ),
     );
@@ -94,10 +93,11 @@ class _NotificationPageState extends State<NotificationPage> {
     return AppBar(
       backgroundColor: const Color(0xFF1E6F86),
       elevation: 0,
-      leading: IconButton(
-        icon: const Icon(Icons.arrow_back, color: Colors.white),
-        onPressed: () => Navigator.pop(context),
-      ),
+      automaticallyImplyLeading: false,
+      // leading: IconButton(
+      //   icon: const Icon(Icons.arrow_back, color: Colors.white),
+      //   onPressed: () => Navigator.pop(context),
+      // ),
       title: const Text(
         "Notifications",
         style: TextStyle(
@@ -166,7 +166,7 @@ class _NotificationPageState extends State<NotificationPage> {
 
   Widget _buildFilterTabs() {
     List<String> filters = ['All', 'Unread', 'Mentions'];
-    
+
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       color: Colors.white,
@@ -184,7 +184,9 @@ class _NotificationPageState extends State<NotificationPage> {
                 margin: const EdgeInsets.symmetric(horizontal: 4),
                 padding: const EdgeInsets.symmetric(vertical: 8),
                 decoration: BoxDecoration(
-                  color: isSelected ? const Color(0xFF1E6F86) : Colors.grey[200],
+                  color: isSelected
+                      ? const Color(0xFF1E6F86)
+                      : Colors.grey[200],
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Text(
@@ -192,7 +194,9 @@ class _NotificationPageState extends State<NotificationPage> {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: isSelected ? Colors.white : Colors.black87,
-                    fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                    fontWeight: isSelected
+                        ? FontWeight.bold
+                        : FontWeight.normal,
                     fontSize: 14,
                   ),
                 ),
@@ -265,9 +269,9 @@ class _NotificationPageState extends State<NotificationPage> {
             children: [
               // Notification Icon/Image
               _buildNotificationIcon(notification['type']),
-              
+
               const SizedBox(width: 16),
-              
+
               // Notification Content
               Expanded(
                 child: Column(
@@ -288,22 +292,19 @@ class _NotificationPageState extends State<NotificationPage> {
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    
+
                     const SizedBox(height: 4),
-                    
+
                     // Description
                     Text(
                       notification['description'],
-                      style: TextStyle(
-                        fontSize: 13,
-                        color: Colors.grey[600],
-                      ),
+                      style: TextStyle(fontSize: 13, color: Colors.grey[600]),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    
+
                     const SizedBox(height: 8),
-                    
+
                     // Time and Status Row
                     Row(
                       children: [
@@ -320,9 +321,9 @@ class _NotificationPageState extends State<NotificationPage> {
                             color: Colors.grey[500],
                           ),
                         ),
-                        
+
                         const SizedBox(width: 12),
-                        
+
                         // Discount Badge (if applicable)
                         if (notification['type'] == 'promo')
                           Container(
@@ -343,9 +344,9 @@ class _NotificationPageState extends State<NotificationPage> {
                               ),
                             ),
                           ),
-                          
+
                         const Spacer(),
-                        
+
                         // Unread Indicator
                         if (notification['isRead'] == false)
                           Container(
@@ -371,7 +372,7 @@ class _NotificationPageState extends State<NotificationPage> {
   Widget _buildNotificationIcon(String type) {
     IconData iconData;
     Color iconColor;
-    
+
     switch (type) {
       case 'booking':
         iconData = Icons.calendar_today;
@@ -401,7 +402,7 @@ class _NotificationPageState extends State<NotificationPage> {
         iconData = Icons.notifications;
         iconColor = Colors.grey;
     }
-    
+
     return Container(
       width: 48,
       height: 48,
@@ -409,11 +410,7 @@ class _NotificationPageState extends State<NotificationPage> {
         color: iconColor.withOpacity(0.1),
         borderRadius: BorderRadius.circular(12),
       ),
-      child: Icon(
-        iconData,
-        color: iconColor,
-        size: 24,
-      ),
+      child: Icon(iconData, color: iconColor, size: 24),
     );
   }
 
@@ -447,10 +444,7 @@ class _NotificationPageState extends State<NotificationPage> {
           const SizedBox(height: 10),
           Text(
             'You don\'t have any notifications at the moment',
-            style: TextStyle(
-              fontSize: 14,
-              color: Colors.grey[600],
-            ),
+            style: TextStyle(fontSize: 14, color: Colors.grey[600]),
             textAlign: TextAlign.center,
           ),
         ],

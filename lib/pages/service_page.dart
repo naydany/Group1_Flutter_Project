@@ -723,10 +723,11 @@ class _ServicePageState extends State<ServicePage> {
       appBar: AppBar(
         backgroundColor: const Color(0xFF1E6F86),
         elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () => Navigator.pop(context),
-        ),
+        automaticallyImplyLeading: false,
+        // leading: IconButton(
+        //   icon: const Icon(Icons.arrow_back),
+        //   onPressed: () => Navigator.pop(context),
+        // ),
         centerTitle: true,
         title: Text(
           appBarTitle,
@@ -767,7 +768,7 @@ class _ServicePageState extends State<ServicePage> {
                 ),
             ],
           ),
-          IconButton(icon: const Icon(Icons.favorite_border), onPressed: () {}),
+          IconButton(icon: const Icon(Icons.shopping_cart), onPressed: () {}),
         ],
       ),
       body: Column(
