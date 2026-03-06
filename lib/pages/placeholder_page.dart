@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:maintenance_provider_service/pages/login_page.dart';
-import 'package:maintenance_provider_service/pages/bookinghistory.dart'; // Adjust the path as needed
+import 'package:maintenance_provider_service/pages/bookinghistory.dart';
+import 'package:maintenance_provider_service/pages/contact_page.dart';
+import 'package:maintenance_provider_service/pages/setting_page.dart';
+import 'package:maintenance_provider_service/pages/payment_methods_page.dart';
 
 class PlaceholderPage extends StatelessWidget {
   final String title;
@@ -75,8 +78,7 @@ class PlaceholderPage extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) =>
-                      const BookingHistoryPage(), // Now this works!
+                  builder: (context) => const BookingHistoryPage(),
                 ),
               );
             },
@@ -94,17 +96,39 @@ class PlaceholderPage extends StatelessWidget {
           _buildMenuItem(
             icon: Icons.payment,
             title: 'Payment Method',
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const PaymentMethodsPage(),
+                ),
+              );
+            },
           ),
 
+          // Contact Us with navigation to ContactPage
           _buildMenuItem(
             icon: Icons.contact_phone,
             title: 'Contact Us',
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ContactPage()),
+              );
+            },
           ),
 
-          _buildMenuItem(icon: Icons.settings, title: 'Setting', onTap: () {}),
-
+          // Settings menu item with navigation
+          _buildMenuItem(
+            icon: Icons.settings,
+            title: 'Setting',
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const SettingPage()),
+              );
+            },
+          ),
           const Divider(),
 
           // Logout
@@ -173,7 +197,6 @@ class PlaceholderPage extends StatelessWidget {
   }
 
   void _logout(BuildContext context) {
-    // Use root navigator to ensure we clear the entire navigation stack
     Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(
       MaterialPageRoute(builder: (context) => const LoginPage()),
       (Route<dynamic> route) => false,

@@ -75,7 +75,7 @@ class _DetailPageState extends State<DetailPage> {
                 fit: StackFit.expand,
                 children: [
                   // Background Image - Using asset image
-                  Image.asset("assets/Images/appliance.jpg", fit: BoxFit.cover),
+                  Image.asset("assets/Images/cleaning.jpeg", fit: BoxFit.cover),
                   // Gradient Overlay
                   Container(
                     decoration: BoxDecoration(
@@ -520,30 +520,42 @@ class _DetailPageState extends State<DetailPage> {
   }
 
   Widget _buildGalleryTab() {
-    return SliverPadding(
-      padding: const EdgeInsets.all(20),
-      sliver: SliverGrid(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          mainAxisSpacing: 10,
-          crossAxisSpacing: 10,
-          childAspectRatio: 1,
-        ),
-        delegate: SliverChildBuilderDelegate((context, index) {
-          // Gallery images from assets folder
+  return SliverPadding(
+    padding: const EdgeInsets.all(20),
+    sliver: SliverGrid(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        mainAxisSpacing: 10,
+        crossAxisSpacing: 10,
+        childAspectRatio: 1,
+      ),
+      delegate: SliverChildBuilderDelegate(
+        (context, index) {
+          // Different images from assets folder for each gallery item
+          List<String> galleryImages = [
+            "assets/Images/appliance.jpg",
+            "assets/Images/plumbing1.jpg",
+            "assets/Images/plumbing2.jpg",
+            "assets/Images/plumbing3.jpg",
+            "assets/Images/plumbing4.jpg",
+            "assets/Images/plumbing5.jpg",
+          ];
+          
           return Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
-              image: const DecorationImage(
-                image: AssetImage("assets/Images/appliance.jpg"),
+              image: DecorationImage(
+                image: AssetImage(galleryImages[index % galleryImages.length]),
                 fit: BoxFit.cover,
               ),
             ),
           );
-        }, childCount: 6),
+        },
+        childCount: 6,
       ),
-    );
-  }
+    ),
+  );
+}
 
   Widget _buildBottomBar(BuildContext context) {
     return Container(

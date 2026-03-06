@@ -222,7 +222,7 @@ class HomePageContent extends StatelessWidget {
         "title": "AC Repair",
         "image":
             "assets/Images/images (6).jpeg", // Fixed typo from eletric to electric
-        "route": const AcRepairServicesPage(),
+        "route": const MyApp(),
       },
       {
         "title": "Plumbing",
